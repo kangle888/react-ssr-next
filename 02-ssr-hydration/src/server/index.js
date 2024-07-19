@@ -1,9 +1,10 @@
 const express = require('express');
 import React from 'react';
-import  ReactDOM from 'react-dom/server';
+import ReactDOM from 'react-dom/server';
 import App from '../app.jsx';
-
 import { StaticRouter } from 'react-router-dom/server';
+import { Provider } from 'react-redux';
+import store from '../store';
 
 const server = express();
 
@@ -11,7 +12,13 @@ const server = express();
 server.use(express.static('build'));
 
 server.get('/', (req, res) => {
-  const app = ReactDOM.renderToString(<StaticRouter location={req.url}><App/></StaticRouter>);
+  const app = ReactDOM.renderToString(
+    <Provider store={store}>
+      <StaticRouter location={req.url}>
+        <App />
+      </StaticRouter>
+    </Provider>
+  );
   res.send(`<!DOCTYPE html>
 <html lang="en">
 <head>

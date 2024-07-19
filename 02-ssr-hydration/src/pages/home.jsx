@@ -1,15 +1,27 @@
 import React from 'react';
-import { useState } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import { increase ,fetchHomeData} from '../store/modules/home';
 
 const Home = () => {
-  const [count, setCount] = useState(0);
+
+  const {count} = useSelector((rootState)=>{
+    return {
+      count: rootState.home.count
+    }
+  });
+  // 触发 action
+  const dispatch = useDispatch();
+
+  const getHomeData = () => {
+    dispatch(fetchHomeData());
+  }
 
   return (
   <div>
     <h1>Hello World</h1>
     <h2>Count: {count}</h2>
-    <button onClick={() => setCount(count + 1)}>Increase</button>
-    <button onClick={() => setCount(count - 1)}>Decrease</button>
+    <button onClick={() => dispatch(increase())}>+1</button>
+    <button onClick= {getHomeData}>getHomeData</button>
   </div>
   )
 }
