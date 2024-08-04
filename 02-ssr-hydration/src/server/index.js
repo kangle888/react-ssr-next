@@ -1,11 +1,13 @@
 const express = require('express');
 import React from 'react';
-import  ReactDOM from 'react-dom/server';
+import ReactDOM from 'react-dom/server';
 import App from '../app.jsx';
 import {Provider} from 'react-redux';
 import store from '../store/index.js';
 
 import { StaticRouter } from 'react-router-dom/server';
+import { Provider } from 'react-redux';
+import store from '../store';
 
 const server = express();
 
